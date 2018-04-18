@@ -67,6 +67,16 @@ public partial class CCTEntities1 : DbContext
 
     public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
 
+    public virtual DbSet<Transit_Requests> Transit_Requests { get; set; }
+
+    public virtual DbSet<Transit_Rides> Transit_Rides { get; set; }
+
+    public virtual DbSet<Buildings> Buildings { get; set; }
+
+    public virtual DbSet<Countries> Countries { get; set; }
+
+    public virtual DbSet<RoomAssign> RoomAssign { get; set; }
+
 
     public virtual ObjectResult<ACTIVE_CLUBS_PER_SESS_ID_Result> ACTIVE_CLUBS_PER_SESS_ID(string sESS_CDE)
     {
@@ -647,6 +657,30 @@ public partial class CCTEntities1 : DbContext
     {
 
         return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ALL_BASIC_INFO_Result>("ALL_BASIC_INFO");
+    }
+
+
+    public virtual ObjectResult<ALL_BASIC_INFO_NOT_ALUMNI_Result> ALL_BASIC_INFO_NOT_ALUMNI()
+    {
+
+        return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ALL_BASIC_INFO_NOT_ALUMNI_Result>("ALL_BASIC_INFO_NOT_ALUMNI");
+    }
+
+
+    public virtual ObjectResult<COURSES_FOR_PROFESSOR_Result> COURSES_FOR_PROFESSOR(Nullable<int> professor_id, string sess_cde)
+    {
+
+        var professor_idParameter = professor_id.HasValue ?
+            new ObjectParameter("professor_id", professor_id) :
+            new ObjectParameter("professor_id", typeof(int));
+
+
+        var sess_cdeParameter = sess_cde != null ?
+            new ObjectParameter("sess_cde", sess_cde) :
+            new ObjectParameter("sess_cde", typeof(string));
+
+
+        return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<COURSES_FOR_PROFESSOR_Result>("COURSES_FOR_PROFESSOR", professor_idParameter, sess_cdeParameter);
     }
 
 }

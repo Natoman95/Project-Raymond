@@ -22,6 +22,11 @@
         <EntityTypeShape EntityType="Gordon360.PART_DEF" Width="1.5" PointX="6.75" PointY="10.75" />
         <EntityTypeShape EntityType="Gordon360.Student" Width="1.5" PointX="10.75" PointY="8.75" />
         <EntityTypeShape EntityType="Gordon360.sysdiagrams" Width="1.5" PointX="13.375" PointY="0.75" />
+        <EntityTypeShape EntityType="Gordon360.Transit_Requests" Width="1.5" PointX="0.75" PointY="13.75" />
+        <EntityTypeShape EntityType="Gordon360.Transit_Rides" Width="1.5" PointX="13.75" PointY="3.75" />
+        <EntityTypeShape EntityType="Gordon360.Buildings" Width="1.5" PointX="13.375" PointY="7.75" />
+        <EntityTypeShape EntityType="Gordon360.Countries" Width="1.5" PointX="7.375" PointY="13.75" />
+        <EntityTypeShape EntityType="Gordon360.RoomAssign" Width="1.5" PointX="13.375" PointY="10.75" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

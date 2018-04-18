@@ -26,6 +26,8 @@ namespace Gordon360.Repositories
         private IRepository<C360_SLIDER> _SliderRepository;
         private IRepository<CUSTOM_PROFILE> _ProfileCustomRepository;
         private IRepository<ChapelEvent> _ChapelEventRepository;
+        private IRepository<Transit_Requests> _TransitRequestRepository;
+        private IRepository<Transit_Rides> _TransitRideRepository;
 
         private CCTEntities1 _context;
 
@@ -104,6 +106,16 @@ namespace Gordon360.Repositories
         public IRepository<CUSTOM_PROFILE> ProfileCustomRepository
         {
             get { return _ProfileCustomRepository ?? (_ProfileCustomRepository = new GenericRepository<CUSTOM_PROFILE>(_context)); }
+        }
+
+        public IRepository<Transit_Requests> TransitRequestRepository
+        {
+            get { return _TransitRequestRepository ?? (_TransitRequestRepository = new GenericRepository<Transit_Requests>(_context)); }
+        }
+
+        public IRepository<Transit_Rides> TransitRideRepository
+        {
+            get { return _TransitRideRepository ?? (_TransitRideRepository = new GenericRepository<Transit_Rides>(_context)); }
         }
 
         public bool Save()

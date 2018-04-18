@@ -99,6 +99,35 @@
           <Property Name="version" Type="int" />
           <Property Name="definition" Type="varbinary(max)" />
         </EntityType>
+        <EntityType Name="Transit_Requests">
+          <Key>
+            <PropertyRef Name="request_id" />
+          </Key>
+          <Property Name="transaction_datetime" Type="datetime" Nullable="false" />
+          <Property Name="request_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="requester_username" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="ride_id" Type="int" />
+          <Property Name="origin" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="destination" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="earliest_departure_datetime" Type="datetime" Nullable="false" />
+          <Property Name="latest_departure_datetime" Type="datetime" Nullable="false" />
+          <Property Name="requester_note" Type="varchar(max)" />
+        </EntityType>
+        <EntityType Name="Transit_Rides">
+          <Key>
+            <PropertyRef Name="ride_id" />
+          </Key>
+          <Property Name="transaction_datetime" Type="datetime" Nullable="false" />
+          <Property Name="ride_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="driver_username" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="passenger_usernames" Type="varchar(max)" />
+          <Property Name="request_ids" Type="varchar(max)" />
+          <Property Name="max_capacity" Type="int" Nullable="false" />
+          <Property Name="origin" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="destination" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="departure_datetime" Type="datetime" Nullable="false" />
+          <Property Name="driver_note" Type="varchar(max)" />
+        </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'CCT.dbo.360_SLIDER' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="360_SLIDER">
@@ -134,6 +163,7 @@ warning 6002: The table/view 'CCT.dbo.ACCOUNT' does not have a primary key defin
         <EntityType Name="ACCOUNT">
           <Key>
             <PropertyRef Name="gordon_id" />
+            <PropertyRef Name="primary_photo" />
             <PropertyRef Name="preferred_photo" />
             <PropertyRef Name="show_pic" />
             <PropertyRef Name="Private" />
@@ -149,11 +179,13 @@ warning 6002: The table/view 'CCT.dbo.ACCOUNT' does not have a primary key defin
           <Property Name="AD_Username" Type="varchar" MaxLength="50" />
           <Property Name="account_type" Type="varchar" MaxLength="20" />
           <Property Name="office_hours" Type="varchar" MaxLength="75" />
+          <Property Name="primary_photo" Type="int" Nullable="false" />
           <Property Name="preferred_photo" Type="int" Nullable="false" />
           <Property Name="show_pic" Type="int" Nullable="false" />
           <Property Name="Private" Type="int" Nullable="false" />
           <Property Name="ReadOnly" Type="int" Nullable="false" />
           <Property Name="is_police" Type="int" Nullable="false" />
+          <Property Name="Chapel_Required" Type="int" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'CCT.dbo.Alumni' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -202,6 +234,15 @@ warning 6002: The table/view 'CCT.dbo.Alumni' does not have a primary key define
           <Property Name="Major1Description" Type="varchar" MaxLength="50" />
         </EntityType>
         <!--Errors Found During Generation:
+warning 6002: The table/view 'CCT.dbo.Buildings' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="Buildings">
+          <Key>
+            <PropertyRef Name="BLDG_CDE" />
+          </Key>
+          <Property Name="BLDG_CDE" Type="char" MaxLength="5" Nullable="false" />
+          <Property Name="BUILDING_DESC" Type="char" MaxLength="45" />
+        </EntityType>
+        <!--Errors Found During Generation:
 warning 6002: The table/view 'CCT.dbo.ChapelEvent' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="ChapelEvent">
           <Key>
@@ -230,9 +271,20 @@ warning 6002: The table/view 'CCT.dbo.CM_SESSION_MSTR' does not have a primary k
             <PropertyRef Name="SESS_CDE" />
           </Key>
           <Property Name="SESS_CDE" Type="char" MaxLength="8" Nullable="false" />
-          <Property Name="SESS_DESC" Type="varchar" MaxLength="60" />
+          <Property Name="SESS_DESC" Type="varchar" MaxLength="1000" />
           <Property Name="SESS_BEGN_DTE" Type="datetime" />
           <Property Name="SESS_END_DTE" Type="datetime" />
+          <Property Name="YRTRM_CDE_2" Type="varchar" MaxLength="32" />
+          <Property Name="YRTRM_CDE_4" Type="varchar" MaxLength="32" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'CCT.dbo.Countries' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="Countries">
+          <Key>
+            <PropertyRef Name="CTY" />
+          </Key>
+          <Property Name="CTY" Type="char" MaxLength="10" Nullable="false" />
+          <Property Name="COUNTRY" Type="char" MaxLength="60" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'CCT.dbo.FacStaff' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -289,6 +341,12 @@ warning 6002: The table/view 'CCT.dbo.JENZ_ACT_CLUB_DEF' does not have a primary
           <Property Name="ACT_TYPE_DESC" Type="char" MaxLength="60" />
         </EntityType>
         <!--Errors Found During Generation:
+warning 6013: The table/view 'CCT.dbo.Majors' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="Majors">
+          <Property Name="MajorCode" Type="varchar" MaxLength="5" />
+          <Property Name="MajorDescription" Type="varchar" MaxLength="50" />
+        </EntityType>-->
+        <!--Errors Found During Generation:
 warning 6002: The table/view 'CCT.dbo.PART_DEF' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="PART_DEF">
           <Key>
@@ -297,6 +355,32 @@ warning 6002: The table/view 'CCT.dbo.PART_DEF' does not have a primary key defi
           </Key>
           <Property Name="PART_CDE" Type="char" MaxLength="5" Nullable="false" />
           <Property Name="PART_DESC" Type="char" MaxLength="45" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6013: The table/view 'CCT.dbo.Police' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="Police">
+          <Property Name="ID_NUM" Type="nvarchar" MaxLength="4000" />
+        </EntityType>-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'CCT.dbo.RoomAssign' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="RoomAssign">
+          <Key>
+            <PropertyRef Name="SESS_CDE" />
+            <PropertyRef Name="BLDG_LOC_CDE" />
+            <PropertyRef Name="BLDG_CDE" />
+            <PropertyRef Name="ROOM_CDE" />
+            <PropertyRef Name="ROOM_SLOT_NUM" />
+            <PropertyRef Name="ROOM_ASSIGN_STS" />
+          </Key>
+          <Property Name="SESS_CDE" Type="char" MaxLength="8" Nullable="false" />
+          <Property Name="BLDG_LOC_CDE" Type="char" MaxLength="5" Nullable="false" />
+          <Property Name="BLDG_CDE" Type="char" MaxLength="5" Nullable="false" />
+          <Property Name="ROOM_CDE" Type="char" MaxLength="5" Nullable="false" />
+          <Property Name="ROOM_SLOT_NUM" Type="int" Nullable="false" />
+          <Property Name="ID_NUM" Type="int" />
+          <Property Name="ROOM_TYPE" Type="char" MaxLength="2" />
+          <Property Name="ROOM_ASSIGN_STS" Type="char" MaxLength="1" Nullable="false" />
+          <Property Name="ASSIGN_DTE" Type="datetime" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'CCT.dbo.Student' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -374,9 +458,14 @@ warning 6002: The table/view 'CCT.dbo.Student' does not have a primary key defin
           <Parameter Name="SESS_CDE" Type="char" Mode="In" />
         </Function>
         <Function Name="ALL_BASIC_INFO" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="ALL_BASIC_INFO_NOT_ALUMNI" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="ALL_MEMBERSHIPS" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="ALL_REQUESTS" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="ALL_SUPERVISORS" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="COURSES_FOR_PROFESSOR" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="professor_id" Type="int" Mode="In" />
+          <Parameter Name="sess_cde" Type="char" Mode="In" />
+        </Function>
         <Function Name="CREATE_SOCIAL_LINKS" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="USERNAME" Type="varchar" Mode="In" />
           <Parameter Name="FACEBOOK" Type="varchar(max)" Mode="In" />
@@ -489,6 +578,8 @@ warning 6002: The table/view 'CCT.dbo.Student' does not have a primary key defin
           <EntitySet Name="MEMBERSHIP" EntityType="Self.MEMBERSHIP" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="REQUEST" EntityType="Self.REQUEST" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Transit_Requests" EntityType="Self.Transit_Requests" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Transit_Rides" EntityType="Self.Transit_Rides" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="360_SLIDER" EntityType="Self.360_SLIDER" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
     [360_SLIDER].[strFileName] AS [strFileName], 
@@ -516,11 +607,13 @@ warning 6002: The table/view 'CCT.dbo.Student' does not have a primary key defin
     [ACCOUNT].[AD_Username] AS [AD_Username], 
     [ACCOUNT].[account_type] AS [account_type], 
     [ACCOUNT].[office_hours] AS [office_hours], 
+    [ACCOUNT].[primary_photo] AS [primary_photo], 
     [ACCOUNT].[preferred_photo] AS [preferred_photo], 
     [ACCOUNT].[show_pic] AS [show_pic], 
     [ACCOUNT].[Private] AS [Private], 
     [ACCOUNT].[ReadOnly] AS [ReadOnly], 
-    [ACCOUNT].[is_police] AS [is_police]
+    [ACCOUNT].[is_police] AS [is_police], 
+    [ACCOUNT].[Chapel_Required] AS [Chapel_Required]
     FROM [dbo].[ACCOUNT] AS [ACCOUNT]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="Alumni" EntityType="Self.Alumni" store:Type="Views" store:Schema="dbo">
@@ -566,6 +659,12 @@ warning 6002: The table/view 'CCT.dbo.Student' does not have a primary key defin
     [Alumni].[Major1Description] AS [Major1Description]
     FROM [dbo].[Alumni] AS [Alumni]</DefiningQuery>
           </EntitySet>
+          <EntitySet Name="Buildings" EntityType="Self.Buildings" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Buildings].[BLDG_CDE] AS [BLDG_CDE], 
+    [Buildings].[BUILDING_DESC] AS [BUILDING_DESC]
+    FROM [dbo].[Buildings] AS [Buildings]</DefiningQuery>
+          </EntitySet>
           <EntitySet Name="ChapelEvent" EntityType="Self.ChapelEvent" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
     [ChapelEvent].[ROWID] AS [ROWID], 
@@ -588,8 +687,16 @@ warning 6002: The table/view 'CCT.dbo.Student' does not have a primary key defin
     [CM_SESSION_MSTR].[SESS_CDE] AS [SESS_CDE], 
     [CM_SESSION_MSTR].[SESS_DESC] AS [SESS_DESC], 
     [CM_SESSION_MSTR].[SESS_BEGN_DTE] AS [SESS_BEGN_DTE], 
-    [CM_SESSION_MSTR].[SESS_END_DTE] AS [SESS_END_DTE]
+    [CM_SESSION_MSTR].[SESS_END_DTE] AS [SESS_END_DTE], 
+    [CM_SESSION_MSTR].[YRTRM_CDE_2] AS [YRTRM_CDE_2], 
+    [CM_SESSION_MSTR].[YRTRM_CDE_4] AS [YRTRM_CDE_4]
     FROM [dbo].[CM_SESSION_MSTR] AS [CM_SESSION_MSTR]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="Countries" EntityType="Self.Countries" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Countries].[CTY] AS [CTY], 
+    [Countries].[COUNTRY] AS [COUNTRY]
+    FROM [dbo].[Countries] AS [Countries]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="FacStaff" EntityType="Self.FacStaff" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
@@ -644,6 +751,19 @@ warning 6002: The table/view 'CCT.dbo.Student' does not have a primary key defin
     [PART_DEF].[PART_CDE] AS [PART_CDE], 
     [PART_DEF].[PART_DESC] AS [PART_DESC]
     FROM [dbo].[PART_DEF] AS [PART_DEF]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="RoomAssign" EntityType="Self.RoomAssign" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [RoomAssign].[SESS_CDE] AS [SESS_CDE], 
+    [RoomAssign].[BLDG_LOC_CDE] AS [BLDG_LOC_CDE], 
+    [RoomAssign].[BLDG_CDE] AS [BLDG_CDE], 
+    [RoomAssign].[ROOM_CDE] AS [ROOM_CDE], 
+    [RoomAssign].[ROOM_SLOT_NUM] AS [ROOM_SLOT_NUM], 
+    [RoomAssign].[ID_NUM] AS [ID_NUM], 
+    [RoomAssign].[ROOM_TYPE] AS [ROOM_TYPE], 
+    [RoomAssign].[ROOM_ASSIGN_STS] AS [ROOM_ASSIGN_STS], 
+    [RoomAssign].[ASSIGN_DTE] AS [ASSIGN_DTE]
+    FROM [dbo].[RoomAssign] AS [RoomAssign]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="Student" EntityType="Self.Student" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
@@ -864,6 +984,16 @@ warning 6002: The table/view 'CCT.dbo.Student' does not have a primary key defin
           <EntitySet Name="Student" EntityType="Gordon360.Student" />
           <FunctionImport Name="ALL_BASIC_INFO" ReturnType="Collection(Gordon360.ALL_BASIC_INFO_Result)" />
           <EntitySet Name="sysdiagrams" EntityType="Gordon360.sysdiagrams" />
+          <EntitySet Name="Transit_Requests" EntityType="Gordon360.Transit_Requests" />
+          <EntitySet Name="Transit_Rides" EntityType="Gordon360.Transit_Rides" />
+          <EntitySet Name="Buildings" EntityType="Gordon360.Buildings" />
+          <EntitySet Name="Countries" EntityType="Gordon360.Countries" />
+          <EntitySet Name="RoomAssign" EntityType="Gordon360.RoomAssign" />
+          <FunctionImport Name="ALL_BASIC_INFO_NOT_ALUMNI" ReturnType="Collection(Gordon360.ALL_BASIC_INFO_NOT_ALUMNI_Result)" />
+          <FunctionImport Name="COURSES_FOR_PROFESSOR" ReturnType="Collection(Gordon360.COURSES_FOR_PROFESSOR_Result)">
+            <Parameter Name="professor_id" Mode="In" Type="Int32" />
+            <Parameter Name="sess_cde" Mode="In" Type="String" />
+          </FunctionImport>
 
         </EntityContainer>
         <ComplexType Name="ACTIVE_CLUBS_PER_SESS_ID_Result">
@@ -1258,6 +1388,7 @@ warning 6002: The table/view 'CCT.dbo.Student' does not have a primary key defin
             <PropertyRef Name="Private" />
             <PropertyRef Name="ReadOnly" />
             <PropertyRef Name="is_police" />
+            <PropertyRef Name="primary_photo" />
           </Key>
           <Property Name="account_id" Type="Int32" />
           <Property Name="gordon_id" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
@@ -1273,6 +1404,8 @@ warning 6002: The table/view 'CCT.dbo.Student' does not have a primary key defin
           <Property Name="Private" Type="Int32" Nullable="false" />
           <Property Name="ReadOnly" Type="Int32" Nullable="false" />
           <Property Name="is_police" Type="Int32" Nullable="false" />
+          <Property Name="primary_photo" Type="Int32" Nullable="false" />
+          <Property Name="Chapel_Required" Type="Int32" />
         </EntityType>
         <EntityType Name="Alumni">
           <Key>
@@ -1343,9 +1476,11 @@ warning 6002: The table/view 'CCT.dbo.Student' does not have a primary key defin
             <PropertyRef Name="SESS_CDE" />
           </Key>
           <Property Name="SESS_CDE" Type="String" Nullable="false" MaxLength="8" FixedLength="true" Unicode="false" />
-          <Property Name="SESS_DESC" Type="String" MaxLength="60" FixedLength="false" Unicode="false" />
+          <Property Name="SESS_DESC" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
           <Property Name="SESS_BEGN_DTE" Type="DateTime" Precision="3" />
           <Property Name="SESS_END_DTE" Type="DateTime" Precision="3" />
+          <Property Name="YRTRM_CDE_2" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
+          <Property Name="YRTRM_CDE_4" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="FacStaff">
           <Key>
@@ -1488,6 +1623,94 @@ warning 6002: The table/view 'CCT.dbo.Student' does not have a primary key defin
           <Property Name="version" Type="Int32" />
           <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
         </EntityType>
+        <EntityType Name="Transit_Requests">
+          <Key>
+            <PropertyRef Name="request_id" />
+          </Key>
+          <Property Name="transaction_datetime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="request_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="requester_username" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ride_id" Type="Int32" />
+          <Property Name="origin" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="destination" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="earliest_departure_datetime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="latest_departure_datetime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="requester_note" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Transit_Rides">
+          <Key>
+            <PropertyRef Name="ride_id" />
+          </Key>
+          <Property Name="transaction_datetime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ride_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="driver_username" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="passenger_usernames" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="request_ids" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="max_capacity" Type="Int32" Nullable="false" />
+          <Property Name="origin" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="destination" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="departure_datetime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="driver_note" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Buildings">
+          <Key>
+            <PropertyRef Name="BLDG_CDE" />
+          </Key>
+          <Property Name="BLDG_CDE" Type="String" Nullable="false" MaxLength="5" FixedLength="true" Unicode="false" />
+          <Property Name="BUILDING_DESC" Type="String" MaxLength="45" FixedLength="true" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Countries">
+          <Key>
+            <PropertyRef Name="CTY" />
+          </Key>
+          <Property Name="CTY" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="false" />
+          <Property Name="COUNTRY" Type="String" MaxLength="60" FixedLength="true" Unicode="false" />
+        </EntityType>
+        <EntityType Name="RoomAssign">
+          <Key>
+            <PropertyRef Name="SESS_CDE" />
+            <PropertyRef Name="BLDG_LOC_CDE" />
+            <PropertyRef Name="BLDG_CDE" />
+            <PropertyRef Name="ROOM_CDE" />
+            <PropertyRef Name="ROOM_SLOT_NUM" />
+            <PropertyRef Name="ROOM_ASSIGN_STS" />
+          </Key>
+          <Property Name="SESS_CDE" Type="String" Nullable="false" MaxLength="8" FixedLength="true" Unicode="false" />
+          <Property Name="BLDG_LOC_CDE" Type="String" Nullable="false" MaxLength="5" FixedLength="true" Unicode="false" />
+          <Property Name="BLDG_CDE" Type="String" Nullable="false" MaxLength="5" FixedLength="true" Unicode="false" />
+          <Property Name="ROOM_CDE" Type="String" Nullable="false" MaxLength="5" FixedLength="true" Unicode="false" />
+          <Property Name="ROOM_SLOT_NUM" Type="Int32" Nullable="false" />
+          <Property Name="ID_NUM" Type="Int32" />
+          <Property Name="ROOM_TYPE" Type="String" MaxLength="2" FixedLength="true" Unicode="false" />
+          <Property Name="ROOM_ASSIGN_STS" Type="String" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="ASSIGN_DTE" Type="DateTime" Precision="3" />
+        </EntityType>
+        <ComplexType Name="ALL_BASIC_INFO_NOT_ALUMNI_Result">
+          <Property Type="String" Name="Firstname" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Lastname" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Username" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="ConcatonatedInfo" Nullable="false" MaxLength="150" />
+        </ComplexType>
+        <ComplexType Name="COURSES_FOR_PROFESSOR_Result">
+          <Property Type="String" Name="YR_CDE" Nullable="false" MaxLength="4" />
+          <Property Type="String" Name="TRM_CDE" Nullable="false" MaxLength="2" />
+          <Property Type="String" Name="CRS_CDE" Nullable="false" MaxLength="30" />
+          <Property Type="String" Name="SUBTERM_CDE" Nullable="true" MaxLength="2" />
+          <Property Type="String" Name="CRS_TITLE" Nullable="true" MaxLength="35" />
+          <Property Type="String" Name="MONDAY_CDE" Nullable="true" MaxLength="1" />
+          <Property Type="String" Name="TUESDAY_CDE" Nullable="true" MaxLength="1" />
+          <Property Type="String" Name="WEDNESDAY_CDE" Nullable="true" MaxLength="1" />
+          <Property Type="String" Name="THURSDAY_CDE" Nullable="true" MaxLength="1" />
+          <Property Type="String" Name="FRIDAY_CDE" Nullable="true" MaxLength="1" />
+          <Property Type="String" Name="SATURDAY_CDE" Nullable="true" MaxLength="1" />
+          <Property Type="String" Name="SUNDAY_CDE" Nullable="true" MaxLength="1" />
+          <Property Type="DateTime" Name="BEGIN_TIM" Nullable="true" Precision="23" />
+          <Property Type="DateTime" Name="END_TIM" Nullable="true" Precision="23" />
+          <Property Type="String" Name="LOC_CDE" Nullable="true" MaxLength="5" />
+          <Property Type="String" Name="BLDG_CDE" Nullable="true" MaxLength="5" />
+          <Property Type="String" Name="ROOM_CDE" Nullable="true" MaxLength="5" />
+          <Property Type="Int32" Name="PROFESSOR_ID_NUM" Nullable="true" />
+        </ComplexType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1944,6 +2167,8 @@ warning 6002: The table/view 'CCT.dbo.Student' does not have a primary key defin
           <EntitySetMapping Name="ACCOUNT">
             <EntityTypeMapping TypeName="Gordon360.ACCOUNT">
               <MappingFragment StoreEntitySet="ACCOUNT">
+                <ScalarProperty Name="Chapel_Required" ColumnName="Chapel_Required" />
+                <ScalarProperty Name="primary_photo" ColumnName="primary_photo" />
                 <ScalarProperty Name="is_police" ColumnName="is_police" />
                 <ScalarProperty Name="ReadOnly" ColumnName="ReadOnly" />
                 <ScalarProperty Name="Private" ColumnName="Private" />
@@ -2028,6 +2253,8 @@ warning 6002: The table/view 'CCT.dbo.Student' does not have a primary key defin
           <EntitySetMapping Name="CM_SESSION_MSTR">
             <EntityTypeMapping TypeName="Gordon360.CM_SESSION_MSTR">
               <MappingFragment StoreEntitySet="CM_SESSION_MSTR">
+                <ScalarProperty Name="YRTRM_CDE_4" ColumnName="YRTRM_CDE_4" />
+                <ScalarProperty Name="YRTRM_CDE_2" ColumnName="YRTRM_CDE_2" />
                 <ScalarProperty Name="SESS_END_DTE" ColumnName="SESS_END_DTE" />
                 <ScalarProperty Name="SESS_BEGN_DTE" ColumnName="SESS_BEGN_DTE" />
                 <ScalarProperty Name="SESS_DESC" ColumnName="SESS_DESC" />
@@ -2183,6 +2410,102 @@ warning 6002: The table/view 'CCT.dbo.Student' does not have a primary key defin
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="Transit_Requests">
+            <EntityTypeMapping TypeName="Gordon360.Transit_Requests">
+              <MappingFragment StoreEntitySet="Transit_Requests">
+                <ScalarProperty Name="requester_note" ColumnName="requester_note" />
+                <ScalarProperty Name="latest_departure_datetime" ColumnName="latest_departure_datetime" />
+                <ScalarProperty Name="earliest_departure_datetime" ColumnName="earliest_departure_datetime" />
+                <ScalarProperty Name="destination" ColumnName="destination" />
+                <ScalarProperty Name="origin" ColumnName="origin" />
+                <ScalarProperty Name="ride_id" ColumnName="ride_id" />
+                <ScalarProperty Name="requester_username" ColumnName="requester_username" />
+                <ScalarProperty Name="request_id" ColumnName="request_id" />
+                <ScalarProperty Name="transaction_datetime" ColumnName="transaction_datetime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Transit_Rides">
+            <EntityTypeMapping TypeName="Gordon360.Transit_Rides">
+              <MappingFragment StoreEntitySet="Transit_Rides">
+                <ScalarProperty Name="driver_note" ColumnName="driver_note" />
+                <ScalarProperty Name="departure_datetime" ColumnName="departure_datetime" />
+                <ScalarProperty Name="destination" ColumnName="destination" />
+                <ScalarProperty Name="origin" ColumnName="origin" />
+                <ScalarProperty Name="max_capacity" ColumnName="max_capacity" />
+                <ScalarProperty Name="request_ids" ColumnName="request_ids" />
+                <ScalarProperty Name="passenger_usernames" ColumnName="passenger_usernames" />
+                <ScalarProperty Name="driver_username" ColumnName="driver_username" />
+                <ScalarProperty Name="ride_id" ColumnName="ride_id" />
+                <ScalarProperty Name="transaction_datetime" ColumnName="transaction_datetime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Buildings">
+            <EntityTypeMapping TypeName="Gordon360.Buildings">
+              <MappingFragment StoreEntitySet="Buildings">
+                <ScalarProperty Name="BUILDING_DESC" ColumnName="BUILDING_DESC" />
+                <ScalarProperty Name="BLDG_CDE" ColumnName="BLDG_CDE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Countries">
+            <EntityTypeMapping TypeName="Gordon360.Countries">
+              <MappingFragment StoreEntitySet="Countries">
+                <ScalarProperty Name="COUNTRY" ColumnName="COUNTRY" />
+                <ScalarProperty Name="CTY" ColumnName="CTY" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RoomAssign">
+            <EntityTypeMapping TypeName="Gordon360.RoomAssign">
+              <MappingFragment StoreEntitySet="RoomAssign">
+                <ScalarProperty Name="ASSIGN_DTE" ColumnName="ASSIGN_DTE" />
+                <ScalarProperty Name="ROOM_ASSIGN_STS" ColumnName="ROOM_ASSIGN_STS" />
+                <ScalarProperty Name="ROOM_TYPE" ColumnName="ROOM_TYPE" />
+                <ScalarProperty Name="ID_NUM" ColumnName="ID_NUM" />
+                <ScalarProperty Name="ROOM_SLOT_NUM" ColumnName="ROOM_SLOT_NUM" />
+                <ScalarProperty Name="ROOM_CDE" ColumnName="ROOM_CDE" />
+                <ScalarProperty Name="BLDG_CDE" ColumnName="BLDG_CDE" />
+                <ScalarProperty Name="BLDG_LOC_CDE" ColumnName="BLDG_LOC_CDE" />
+                <ScalarProperty Name="SESS_CDE" ColumnName="SESS_CDE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="ALL_BASIC_INFO_NOT_ALUMNI" FunctionName="Gordon360.Store.ALL_BASIC_INFO_NOT_ALUMNI">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Gordon360.ALL_BASIC_INFO_NOT_ALUMNI_Result">
+                <ScalarProperty Name="Firstname" ColumnName="Firstname" />
+                <ScalarProperty Name="Lastname" ColumnName="Lastname" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="ConcatonatedInfo" ColumnName="ConcatonatedInfo" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="COURSES_FOR_PROFESSOR" FunctionName="Gordon360.Store.COURSES_FOR_PROFESSOR">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Gordon360.COURSES_FOR_PROFESSOR_Result">
+                <ScalarProperty Name="YR_CDE" ColumnName="YR_CDE" />
+                <ScalarProperty Name="TRM_CDE" ColumnName="TRM_CDE" />
+                <ScalarProperty Name="CRS_CDE" ColumnName="CRS_CDE" />
+                <ScalarProperty Name="SUBTERM_CDE" ColumnName="SUBTERM_CDE" />
+                <ScalarProperty Name="CRS_TITLE" ColumnName="CRS_TITLE" />
+                <ScalarProperty Name="MONDAY_CDE" ColumnName="MONDAY_CDE" />
+                <ScalarProperty Name="TUESDAY_CDE" ColumnName="TUESDAY_CDE" />
+                <ScalarProperty Name="WEDNESDAY_CDE" ColumnName="WEDNESDAY_CDE" />
+                <ScalarProperty Name="THURSDAY_CDE" ColumnName="THURSDAY_CDE" />
+                <ScalarProperty Name="FRIDAY_CDE" ColumnName="FRIDAY_CDE" />
+                <ScalarProperty Name="SATURDAY_CDE" ColumnName="SATURDAY_CDE" />
+                <ScalarProperty Name="SUNDAY_CDE" ColumnName="SUNDAY_CDE" />
+                <ScalarProperty Name="BEGIN_TIM" ColumnName="BEGIN_TIM" />
+                <ScalarProperty Name="END_TIM" ColumnName="END_TIM" />
+                <ScalarProperty Name="LOC_CDE" ColumnName="LOC_CDE" />
+                <ScalarProperty Name="BLDG_CDE" ColumnName="BLDG_CDE" />
+                <ScalarProperty Name="ROOM_CDE" ColumnName="ROOM_CDE" />
+                <ScalarProperty Name="PROFESSOR_ID_NUM" ColumnName="PROFESSOR_ID_NUM" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
           </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

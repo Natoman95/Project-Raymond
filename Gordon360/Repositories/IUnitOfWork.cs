@@ -23,6 +23,8 @@ namespace Gordon360.Repositories
         IRepository<C360_SLIDER> SliderRepository { get; }
         IRepository<CUSTOM_PROFILE> ProfileCustomRepository { get; }
         IRepository<ChapelEvent> ChapelEventRepository { get; }
+        IRepository<Transit_Requests> TransitRequestRepository { get; }
+        IRepository<Transit_Rides> TransitRideRepository { get; }
 
         // Note -- Only use this repository to call SQL Stored Procedures
         IRepository<ACTIVE_CLUBS_PER_SESS_ID_Result> ActivityPerSessionRepository { get;  }

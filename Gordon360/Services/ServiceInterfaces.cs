@@ -155,5 +155,34 @@ namespace Gordon360.Services
         IEnumerable<SliderViewModel> GetSliderContent();
     }
 
+    public interface IRequestService
+    {
+        TransitRequestViewModel GetById(int id);
+        IEnumerable<TransitRequestViewModel> GetByUsername(string username);
+        void PostRequest(TransitRequestViewModel request);
+        void UpdateRide(int requestId, int rideId);
+        void UpdateOrigin(int id, string origin);
+        void UpdateDestination(int id, string destination);
+        void UpdateEarliestDateTime(int id, DateTime dateTime);
+        void UpdateLatestDateTime(int id, DateTime dateTime);
+        void DeleteRequest(int id);
+    }
+
+    public interface IRideService
+    {
+        TransitRideViewModel GetById(int id);
+        IEnumerable<TransitRideViewModel> GetOfferedByUsername(string username);
+        IEnumerable<TransitRideViewModel> GetConfirmedByUsername(string username);
+        IEnumerable<TransitRideViewModel> GetByLocation(string origin, string destination);
+        void PostRide(TransitRideViewModel ride);
+        void UpdatePassengers(int rideId, int passengerId);
+        void UpdateOrigin(int id, string origin);
+        void UpdateDestination(int id, string destination);
+        void UpdateDateTime(int id, DateTime dateTime);
+        void UpdateNote(int id, string note);
+        void UpdateCapacity(int id, int capacity);
+        void UpdateRequests(int rideId, int requestId);
+        void DeleteRide(int id);
+    }
 }
 
