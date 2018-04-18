@@ -67,8 +67,6 @@ public partial class CCTEntities1 : DbContext
 
     public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
 
-    public virtual DbSet<Transit_Requests> Transit_Requests { get; set; }
-
     public virtual DbSet<Transit_Rides> Transit_Rides { get; set; }
 
     public virtual DbSet<Buildings> Buildings { get; set; }
@@ -76,6 +74,8 @@ public partial class CCTEntities1 : DbContext
     public virtual DbSet<Countries> Countries { get; set; }
 
     public virtual DbSet<RoomAssign> RoomAssign { get; set; }
+
+    public virtual DbSet<Transit_Requests> Transit_Requests { get; set; }
 
 
     public virtual ObjectResult<ACTIVE_CLUBS_PER_SESS_ID_Result> ACTIVE_CLUBS_PER_SESS_ID(string sESS_CDE)

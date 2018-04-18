@@ -30,9 +30,9 @@ public partial class Transit_Requests
 
     public string destination { get; set; }
 
-    public System.DateTime earliest_departure_datetime { get; set; }
+    public Nullable<System.DateTime> earliest_departure_datetime { get; set; }
 
-    public System.DateTime latest_departure_datetime { get; set; }
+    public Nullable<System.DateTime> latest_departure_datetime { get; set; }
 
     public string requester_note { get; set; }
 

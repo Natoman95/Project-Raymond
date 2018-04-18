@@ -12,8 +12,8 @@ namespace Gordon360.Models.ViewModels
         public Nullable<int> rideId { get; set; }
         public string origin { get; set; }
         public string destination { get; set; }
-        public DateTime earliestDepartureDateTime { get; set; }
-        public DateTime latestDepartureDateTime { get; set; }
+        public Nullable<DateTime> earliestDepartureDateTime { get; set; }
+        public Nullable<DateTime> latestDepartureDateTime { get; set; }
         public string requesterNote { get; set; }
 
         public static implicit operator TransitRequestViewModel(Transit_Requests model)

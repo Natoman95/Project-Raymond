@@ -107,10 +107,10 @@
           <Property Name="request_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="requester_username" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="ride_id" Type="int" />
-          <Property Name="origin" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="destination" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="earliest_departure_datetime" Type="datetime" Nullable="false" />
-          <Property Name="latest_departure_datetime" Type="datetime" Nullable="false" />
+          <Property Name="origin" Type="varchar" MaxLength="50" />
+          <Property Name="destination" Type="varchar" MaxLength="50" />
+          <Property Name="earliest_departure_datetime" Type="datetime" />
+          <Property Name="latest_departure_datetime" Type="datetime" />
           <Property Name="requester_note" Type="varchar(max)" />
         </EntityType>
         <EntityType Name="Transit_Rides">
@@ -341,12 +341,6 @@ warning 6002: The table/view 'CCT.dbo.JENZ_ACT_CLUB_DEF' does not have a primary
           <Property Name="ACT_TYPE_DESC" Type="char" MaxLength="60" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6013: The table/view 'CCT.dbo.Majors' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
-        <EntityType Name="Majors">
-          <Property Name="MajorCode" Type="varchar" MaxLength="5" />
-          <Property Name="MajorDescription" Type="varchar" MaxLength="50" />
-        </EntityType>-->
-        <!--Errors Found During Generation:
 warning 6002: The table/view 'CCT.dbo.PART_DEF' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="PART_DEF">
           <Key>
@@ -356,11 +350,6 @@ warning 6002: The table/view 'CCT.dbo.PART_DEF' does not have a primary key defi
           <Property Name="PART_CDE" Type="char" MaxLength="5" Nullable="false" />
           <Property Name="PART_DESC" Type="char" MaxLength="45" Nullable="false" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6013: The table/view 'CCT.dbo.Police' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
-        <EntityType Name="Police">
-          <Property Name="ID_NUM" Type="nvarchar" MaxLength="4000" />
-        </EntityType>-->
         <!--Errors Found During Generation:
 warning 6002: The table/view 'CCT.dbo.RoomAssign' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="RoomAssign">
@@ -984,7 +973,6 @@ warning 6002: The table/view 'CCT.dbo.Student' does not have a primary key defin
           <EntitySet Name="Student" EntityType="Gordon360.Student" />
           <FunctionImport Name="ALL_BASIC_INFO" ReturnType="Collection(Gordon360.ALL_BASIC_INFO_Result)" />
           <EntitySet Name="sysdiagrams" EntityType="Gordon360.sysdiagrams" />
-          <EntitySet Name="Transit_Requests" EntityType="Gordon360.Transit_Requests" />
           <EntitySet Name="Transit_Rides" EntityType="Gordon360.Transit_Rides" />
           <EntitySet Name="Buildings" EntityType="Gordon360.Buildings" />
           <EntitySet Name="Countries" EntityType="Gordon360.Countries" />
@@ -994,6 +982,7 @@ warning 6002: The table/view 'CCT.dbo.Student' does not have a primary key defin
             <Parameter Name="professor_id" Mode="In" Type="Int32" />
             <Parameter Name="sess_cde" Mode="In" Type="String" />
           </FunctionImport>
+          <EntitySet Name="Transit_Requests" EntityType="Gordon360.Transit_Requests" />
 
         </EntityContainer>
         <ComplexType Name="ACTIVE_CLUBS_PER_SESS_ID_Result">
@@ -1623,20 +1612,6 @@ warning 6002: The table/view 'CCT.dbo.Student' does not have a primary key defin
           <Property Name="version" Type="Int32" />
           <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
         </EntityType>
-        <EntityType Name="Transit_Requests">
-          <Key>
-            <PropertyRef Name="request_id" />
-          </Key>
-          <Property Name="transaction_datetime" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="request_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="requester_username" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="ride_id" Type="Int32" />
-          <Property Name="origin" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="destination" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="earliest_departure_datetime" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="latest_departure_datetime" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="requester_note" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-        </EntityType>
         <EntityType Name="Transit_Rides">
           <Key>
             <PropertyRef Name="ride_id" />
@@ -1711,6 +1686,20 @@ warning 6002: The table/view 'CCT.dbo.Student' does not have a primary key defin
           <Property Type="String" Name="ROOM_CDE" Nullable="true" MaxLength="5" />
           <Property Type="Int32" Name="PROFESSOR_ID_NUM" Nullable="true" />
         </ComplexType>
+        <EntityType Name="Transit_Requests">
+          <Key>
+            <PropertyRef Name="request_id" />
+          </Key>
+          <Property Name="transaction_datetime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="request_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="requester_username" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ride_id" Type="Int32" />
+          <Property Name="origin" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="destination" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="earliest_departure_datetime" Type="DateTime" Precision="3" />
+          <Property Name="latest_departure_datetime" Type="DateTime" Precision="3" />
+          <Property Name="requester_note" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -2410,21 +2399,6 @@ warning 6002: The table/view 'CCT.dbo.Student' does not have a primary key defin
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Transit_Requests">
-            <EntityTypeMapping TypeName="Gordon360.Transit_Requests">
-              <MappingFragment StoreEntitySet="Transit_Requests">
-                <ScalarProperty Name="requester_note" ColumnName="requester_note" />
-                <ScalarProperty Name="latest_departure_datetime" ColumnName="latest_departure_datetime" />
-                <ScalarProperty Name="earliest_departure_datetime" ColumnName="earliest_departure_datetime" />
-                <ScalarProperty Name="destination" ColumnName="destination" />
-                <ScalarProperty Name="origin" ColumnName="origin" />
-                <ScalarProperty Name="ride_id" ColumnName="ride_id" />
-                <ScalarProperty Name="requester_username" ColumnName="requester_username" />
-                <ScalarProperty Name="request_id" ColumnName="request_id" />
-                <ScalarProperty Name="transaction_datetime" ColumnName="transaction_datetime" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Transit_Rides">
             <EntityTypeMapping TypeName="Gordon360.Transit_Rides">
               <MappingFragment StoreEntitySet="Transit_Rides">
@@ -2506,6 +2480,21 @@ warning 6002: The table/view 'CCT.dbo.Student' does not have a primary key defin
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <EntitySetMapping Name="Transit_Requests">
+            <EntityTypeMapping TypeName="Gordon360.Transit_Requests">
+              <MappingFragment StoreEntitySet="Transit_Requests">
+                <ScalarProperty Name="requester_note" ColumnName="requester_note" />
+                <ScalarProperty Name="latest_departure_datetime" ColumnName="latest_departure_datetime" />
+                <ScalarProperty Name="earliest_departure_datetime" ColumnName="earliest_departure_datetime" />
+                <ScalarProperty Name="destination" ColumnName="destination" />
+                <ScalarProperty Name="origin" ColumnName="origin" />
+                <ScalarProperty Name="ride_id" ColumnName="ride_id" />
+                <ScalarProperty Name="requester_username" ColumnName="requester_username" />
+                <ScalarProperty Name="request_id" ColumnName="request_id" />
+                <ScalarProperty Name="transaction_datetime" ColumnName="transaction_datetime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
