@@ -118,32 +118,62 @@ namespace Gordon360.Services
 
         public void UpdatePassengers(int rideId, int passengerId)
         {
-            
+
         }
 
         public void UpdateOrigin(int id, string origin)
         {
-            
+            Transit_Rides query = _unitOfWork.TransitRideRepository.GetById(id);
+            if (query != null)
+            {
+                _unitOfWork.TransitRideRepository.Attach(query);
+                query.origin = origin;
+                _unitOfWork.Save();
+            }
         }
 
         public void UpdateDestination(int id, string destination)
         {
-
+            Transit_Rides query = _unitOfWork.TransitRideRepository.GetById(id);
+            if (query != null)
+            {
+                _unitOfWork.TransitRideRepository.Attach(query);
+                query.destination = destination;
+                _unitOfWork.Save();
+            }
         }
 
         public void UpdateDateTime(int id, DateTime dateTime)
         {
-
+            Transit_Rides query = _unitOfWork.TransitRideRepository.GetById(id);
+            if (query != null)
+            {
+                _unitOfWork.TransitRideRepository.Attach(query);
+                query.departure_datetime = dateTime;
+                _unitOfWork.Save();
+            }
         }
 
         public void UpdateNote(int id, string note)
         {
-
+            Transit_Rides query = _unitOfWork.TransitRideRepository.GetById(id);
+            if (query != null)
+            {
+                _unitOfWork.TransitRideRepository.Attach(query);
+                query.driver_note = note;
+                _unitOfWork.Save();
+            }
         }
 
         public void UpdateCapacity(int id, int capacity)
         {
-
+            Transit_Rides query = _unitOfWork.TransitRideRepository.GetById(id);
+            if (query != null)
+            {
+                _unitOfWork.TransitRideRepository.Attach(query);
+                query.max_capacity = capacity;
+                _unitOfWork.Save();
+            }
         }
 
         public void UpdateRequests(int rideId, int requestId)

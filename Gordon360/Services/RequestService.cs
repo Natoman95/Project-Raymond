@@ -73,7 +73,13 @@ namespace Gordon360.Services
 
         public void UpdateRide(int requestId, int rideId)
         {
-            
+            Transit_Requests query = _unitOfWork.TransitRequestRepository.GetById(requestId);
+            if (query != null)
+            {
+                _unitOfWork.TransitRequestRepository.Attach(query);
+                query.ride_id = rideId;
+                _unitOfWork.Save();
+            }
         }
 
         public void UpdateOrigin(int id, string origin)
