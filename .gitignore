@@ -33,7 +33,6 @@ bld/
 # Database Models
 Gordon360/Models/*
 !Gordon360/Models/ViewModels/
-!Gordon360/Models/CCT_DB_Models.edmx
 !Gordon360/Models/Metadata.cs
 !Gordon360/Models/ModelPartialClasses.cs
 
