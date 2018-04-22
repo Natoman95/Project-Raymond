@@ -8,6 +8,9 @@ using Gordon360.Models.ViewModels;
 
 namespace Gordon360.Services
 {
+    /// <summary>
+    /// Service that handles interactions with the database related to the Gordon Transit app's request objects
+    /// </summary>
     public class RequestService : IRequestService
     {
         private IUnitOfWork _unitOfWork;

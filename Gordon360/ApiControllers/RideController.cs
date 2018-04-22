@@ -8,6 +8,9 @@ using Gordon360.Repositories;
 
 namespace Gordon360.Controllers.Api
 {
+    /// <summary>
+    /// Controller that handles web requests related to ride objects belonging to the Gordon transit app
+    /// </summary>
     [Authorize]
     [CustomExceptionFilter]
     [RoutePrefix("api/transit/ride")]

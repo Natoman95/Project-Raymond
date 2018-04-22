@@ -5,6 +5,10 @@ using System.Web;
 
 namespace Gordon360.Models.ViewModels
 {
+    /// <summary>
+    /// Models request objects belonging to the Gordon transit app
+    /// Makes the generated DB model more user friendly and easier for the client to interact with
+    /// </summary>
     public class TransitRequestViewModel
     {
         public int requestId { get; set; }

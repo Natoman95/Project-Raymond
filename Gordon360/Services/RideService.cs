@@ -8,6 +8,9 @@ using Gordon360.Models;
 
 namespace Gordon360.Services
 {
+    /// <summary>
+    /// Service that handles interactions with the database related to the Gordon Transit app's ride objects
+    /// </summary>
     public class RideService : IRideService
     {
         private IUnitOfWork _unitOfWork;
