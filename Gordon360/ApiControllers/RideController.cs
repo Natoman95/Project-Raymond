@@ -85,14 +85,6 @@ namespace Gordon360.Controllers.Api
         }
 
         [HttpPut]
-        [Route("passengers/{rideid}/{passengerid}")]
-        public IHttpActionResult UpdatePassengers(int rideid, int passengerid)
-        {
-            _rideService.UpdatePassengers(rideid, passengerid);
-            return Ok();
-        }
-
-        [HttpPut]
         [Route("origin/{id}/{origin}")]
         public IHttpActionResult UpdateOrigin(int id, string origin)
         {
@@ -129,14 +121,6 @@ namespace Gordon360.Controllers.Api
         public IHttpActionResult UpdateCapacity(int id, int capacity)
         {
             _rideService.UpdateCapacity(id, capacity);
-            return Ok();
-        }
-
-        [HttpPut]
-        [Route("requests/{rideid}/{requestid}")]
-        public IHttpActionResult UpdateRequests(int rideid, int requestid)
-        {
-            _rideService.UpdateRequests(rideid, requestid);
             return Ok();
         }
 

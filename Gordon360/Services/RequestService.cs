@@ -22,38 +22,38 @@ namespace Gordon360.Services
 
         public TransitRequestViewModel GetById(int id)
         {
-            TransitRequestViewModel result;
-            Transit_Requests query = _unitOfWork.TransitRequestRepository.GetById(id);
-            if (query == null)
+            TransitRequestViewModel resultRequest;
+            Transit_Requests request = _unitOfWork.TransitRequestRepository.GetById(id);
+            if (request == null)
             {
-                result = null;
+                resultRequest = null;
             }
             else
             {
                 // Convert model to view model
-                result = query;
+                resultRequest = request;
             }
-            return result;
+            return resultRequest;
         }
 
         public IEnumerable<TransitRequestViewModel> GetByUsername(string username)
         {
-            List<TransitRequestViewModel> result = new List<TransitRequestViewModel>();
-            IEnumerable<Transit_Requests> query = _unitOfWork.TransitRequestRepository.Where(m => m.requester_username == username);
-            if (query == null)
+            List<TransitRequestViewModel> userRequests = new List<TransitRequestViewModel>();
+            IEnumerable<Transit_Requests> requests = _unitOfWork.TransitRequestRepository.Where(m => m.requester_username == username);
+            if (requests == null)
             {
-                result = null;
+                userRequests = null;
             }
             else
             {
                 // Convert models to view models
-                foreach (Transit_Requests item in query)
+                foreach (Transit_Requests request in requests)
                 {
-                    TransitRequestViewModel convertedItem = item;
-                    result.Add(convertedItem);
+                    TransitRequestViewModel convertedRequest = request;
+                    userRequests.Add(convertedRequest);
                 }
             }
-            return result;
+            return userRequests;
         }
 
         public void PostRequest(TransitRequestViewModel request)
@@ -62,12 +62,9 @@ namespace Gordon360.Services
             Transit_Requests requestModel = new Transit_Requests();
             requestModel.transaction_datetime = DateTime.Now;
             requestModel.requester_username = request.requesterUsername;
-            requestModel.ride_id = request.rideId;
-            requestModel.origin = request.origin;
-            requestModel.destination = request.destination;
-            requestModel.earliest_departure_datetime = request.earliestDepartureDateTime;
-            requestModel.latest_departure_datetime = request.latestDepartureDateTime;
+            requestModel.ride_id = request.rideID;
             requestModel.requester_note = request.requesterNote;
+            requestModel.is_confirmed = request.isConfirmed;
 
             // Add the model as a new row in the database
             _unitOfWork.TransitRequestRepository.Add(requestModel);
@@ -76,41 +73,32 @@ namespace Gordon360.Services
 
         public void UpdateRide(int requestId, int rideId)
         {
-            Transit_Requests query = _unitOfWork.TransitRequestRepository.GetById(requestId);
-            if (query != null)
+            Transit_Requests request = _unitOfWork.TransitRequestRepository.GetById(requestId);
+            if (request != null)
             {
-                _unitOfWork.TransitRequestRepository.Attach(query);
-                query.ride_id = rideId;
+                _unitOfWork.TransitRequestRepository.Attach(request);
+                request.ride_id = rideId;
                 _unitOfWork.Save();
             }
         }
 
-        public void UpdateOrigin(int id, string origin)
+        public void UpdateConfirmed(int id, bool isConfirmed)
         {
-            
-        }
-
-        public void UpdateDestination(int id, string destination)
-        {
-            
-        }
-
-        public void UpdateEarliestDateTime(int id, DateTime dateTime)
-        {
-            
-        }
-
-        public void UpdateLatestDateTime(int id, DateTime dateTime)
-        {
-            
+            Transit_Requests request = _unitOfWork.TransitRequestRepository.GetById(id);
+            if (request != null)
+            {
+                _unitOfWork.TransitRequestRepository.Attach(request);
+                request.is_confirmed = isConfirmed;
+                _unitOfWork.Save();
+            }
         }
 
         public void DeleteRequest(int id)
         {
-            Transit_Requests query = _unitOfWork.TransitRequestRepository.GetById(id);
-            if (query != null)
+            Transit_Requests request = _unitOfWork.TransitRequestRepository.GetById(id);
+            if (request != null)
             {
-                _unitOfWork.TransitRequestRepository.Delete(query);
+                _unitOfWork.TransitRequestRepository.Delete(request);
                 _unitOfWork.Save();
             }
         }

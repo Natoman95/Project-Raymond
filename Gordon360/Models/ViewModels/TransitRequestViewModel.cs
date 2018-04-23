@@ -11,27 +11,21 @@ namespace Gordon360.Models.ViewModels
     /// </summary>
     public class TransitRequestViewModel
     {
-        public int requestId { get; set; }
+        public int requestID { get; set; }
         public string requesterUsername { get; set; }
-        public Nullable<int> rideId { get; set; }
-        public string origin { get; set; }
-        public string destination { get; set; }
-        public Nullable<DateTime> earliestDepartureDateTime { get; set; }
-        public Nullable<DateTime> latestDepartureDateTime { get; set; }
+        public int rideID { get; set; }
         public string requesterNote { get; set; }
+        public bool isConfirmed { get; set; }
 
         public static implicit operator TransitRequestViewModel(Transit_Requests model)
         {
             TransitRequestViewModel viewModel = new TransitRequestViewModel
             {
-                requestId = model.request_id,
+                requestID = model.request_id,
                 requesterUsername = model.requester_username,
-                rideId = model.ride_id,
-                origin = model.origin,
-                destination = model.destination,
-                earliestDepartureDateTime = model.earliest_departure_datetime,
-                latestDepartureDateTime = model.latest_departure_datetime,
-                requesterNote = model.requester_note
+                rideID = model.ride_id,
+                requesterNote = model.requester_note,
+                isConfirmed = model.is_confirmed
             };
 
             return viewModel;
