@@ -58,34 +58,10 @@ namespace Gordon360.Controllers.Api
         }
 
         [HttpPut]
-        [Route("origin/{id}/{origin}")]
-        public IHttpActionResult UpdateOrigin(int id, string origin)
+        [Route("confirmed/{id}/{isconfirmed}")]
+        public IHttpActionResult UpdateConfirmed(int id, bool isconfirmed)
         {
-            _requestService.UpdateOrigin(id, origin);
-            return Ok();
-        }
-
-        [HttpPut]
-        [Route("destination/{id}/{destination}")]
-        public IHttpActionResult UpdateDestination(int id, string destination)
-        {
-            _requestService.UpdateDestination(id, destination);
-            return Ok();
-        }
-
-        [HttpPut]
-        [Route("earliest/{id}/{dateTime}")]
-        public IHttpActionResult UpdateEarliestDateTime(int id, DateTime dateTime)
-        {
-            _requestService.UpdateEarliestDateTime(id, dateTime);
-            return Ok();
-        }
-
-        [HttpPut]
-        [Route("latest/{id}/{dateTime}")]
-        public IHttpActionResult UpdateLatestDateTime(int id, DateTime dateTime)
-        {
-            _requestService.UpdateLatestDateTime(id, dateTime);
+            _requestService.UpdateConfirmed(id, isconfirmed);
             return Ok();
         }
 
