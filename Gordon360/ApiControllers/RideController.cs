@@ -56,6 +56,15 @@ namespace Gordon360.Controllers.Api
             return Ok(rides);
         }
 
+        // Get the requested rides that belong to a user
+        [HttpGet]
+        [Route("user/{username}/pending")]
+        public IHttpActionResult GetPendingByUsername(string username)
+        {
+            IEnumerable<TransitRideViewModel> rides = _rideService.GetPendingByUsername(username);
+            return Ok(rides);
+        }
+
         // Find suitable rides based on desired origin and destination
         [HttpGet]
         [Route("location/{origin}/{destination}")]

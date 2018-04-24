@@ -95,6 +95,30 @@ namespace Gordon360.Services
             return rides;
         }
 
+        public IEnumerable<TransitRideViewModel> GetPendingByUsername(string username)
+        {
+            List<TransitRideViewModel> rides = new List<TransitRideViewModel>();
+            // Get the requests belonging to the user that have not been confirmed
+            IEnumerable<Transit_Requests> requests = _unitOfWork.TransitRequestRepository.
+                Where(m => m.requester_username == username && m.is_confirmed == false);
+            if (requests == null)
+            {
+                rides = null;
+            }
+            else
+            {
+                {
+                    // Get the rides this user is a pending passenger on
+                    foreach (Transit_Requests request in requests)
+                    {
+                        TransitRideViewModel ride = GetById(request.ride_id);
+                        rides.Add(ride);
+                    }
+                }
+            }
+            return rides;
+        }
+
         public IEnumerable<TransitRideViewModel> GetByLocation(string origin, string destination)
         {
             // This will have to be modified later to include a much more complex algorithm
