@@ -5,6 +5,7 @@ using Gordon360.Services;
 using Gordon360.Exceptions.ExceptionFilters;
 using Gordon360.Models.ViewModels;
 using Gordon360.Repositories;
+using System.Dynamic;
 
 namespace Gordon360.Controllers.Api
 {
@@ -68,12 +69,17 @@ namespace Gordon360.Controllers.Api
             return Ok(rides);
         }
 
-        // Find suitable rides based on desired origin and destination
-        [HttpGet]
-        [Route("location/{origin}/{destination}")]
-        public IHttpActionResult GetByLocation(string origin, string destination)
+        // Find suitable rides based on desired origin, destination, and time
+        [HttpPost]
+        [Route("location")]
+        public IHttpActionResult GetByLocation([FromBody] dynamic body)
         {
-            IEnumerable<TransitRideViewModel> rides = _rideService.GetByLocation(origin, destination);
+            string origin = (string) body.origin;
+            string destination = (string) body.destination;
+            DateTime startDate = (DateTime) body.startDate;
+            DateTime endDate = (DateTime) body.endDate;
+
+            IEnumerable<TransitRideViewModel> rides = _rideService.GetByLocation(origin, destination, startDate, endDate);
             if (rides != null)
             {
                 return Ok(rides);

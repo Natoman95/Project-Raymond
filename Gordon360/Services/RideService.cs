@@ -122,11 +122,15 @@ namespace Gordon360.Services
             return rides;
         }
 
-        public IEnumerable<TransitRideViewModel> GetByLocation(string origin, string destination)
+        public IEnumerable<TransitRideViewModel> GetByLocation(string origin, string destination, DateTime startDate, DateTime endDate)
         {
             // This will have to be modified later to include a much more complex algorithm
             List<TransitRideViewModel> result = new List<TransitRideViewModel>();
-            IEnumerable<Transit_Rides> rides = _unitOfWork.TransitRideRepository.Where(m => m.destination == destination);
+            IEnumerable<Transit_Rides> rides = _unitOfWork.TransitRideRepository.
+                Where(m => m.destination.ToLower() == destination.ToLower()
+                && m.origin.ToLower() == origin
+                && m.departure_datetime >= startDate
+                && m.departure_datetime <= endDate);
             if (rides == null)
             {
                 result = null;

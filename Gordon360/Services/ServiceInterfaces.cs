@@ -171,7 +171,7 @@ namespace Gordon360.Services
         IEnumerable<TransitRideViewModel> GetOfferedByUsername(string username);
         IEnumerable<TransitRideViewModel> GetConfirmedByUsername(string username);
         IEnumerable<TransitRideViewModel> GetPendingByUsername(string username);
-        IEnumerable<TransitRideViewModel> GetByLocation(string origin, string destination);
+        IEnumerable<TransitRideViewModel> GetByLocation(string origin, string destination, DateTime startDate, DateTime endDate);
         void PostRide(TransitRideViewModel ride);
         void UpdateOrigin(int id, string origin);
         void UpdateDestination(int id, string destination);
