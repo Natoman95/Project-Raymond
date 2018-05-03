@@ -160,7 +160,6 @@ namespace Gordon360.Services
         TransitRequestViewModel GetById(int id);
         IEnumerable<TransitRequestViewModel> GetByUsername(string username);
         void PostRequest(TransitRequestViewModel request);
-        void UpdateRide(int requestId, int rideId);
         void UpdateConfirmed(int id, bool isConfirmed);
         void DeleteRequest(int id);
     }

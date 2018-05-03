@@ -13,7 +13,6 @@ namespace Gordon360.Models.ViewModels
     {
         public int rideID { get; set; }
         public string driverUsername { get; set; }
-        public List<string> passengerUsernames { get; set; }
         public List<int> requestIDs { get; set; }
         public int maxCapacity { get; set; }
         public string origin { get; set; }

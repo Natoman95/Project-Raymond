@@ -53,14 +53,6 @@ namespace Gordon360.Controllers.Api
         }
 
         [HttpPut]
-        [Route("ride/{requestid}/{rideid}")]
-        public IHttpActionResult UpdateRide(int requestid, int rideid)
-        {
-            _requestService.UpdateRide(requestid, rideid);
-            return Ok();
-        }
-
-        [HttpPut]
         [Route("confirmed/{id}/{isconfirmed}")]
         public IHttpActionResult UpdateConfirmed(int id, bool isconfirmed)
         {

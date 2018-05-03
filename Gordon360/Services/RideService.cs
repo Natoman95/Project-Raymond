@@ -32,12 +32,8 @@ namespace Gordon360.Services
             {
                 // Implicitly convert most values
                 TransitRideViewModel convertedRide = query;
-                // The passengers and requests have to be retrieved via another query
-                List<string> passengers = new List<string>();
-                List<int> pendingRequests = new List<int>();
-                GetRequests(query.ride_id, passengers, pendingRequests);
-                convertedRide.passengerUsernames = passengers;
-                convertedRide.requestIDs = pendingRequests;
+                // The requests have to be retrieved via another query
+                convertedRide.requestIDs = GetRequests(query.ride_id);
 
                 ride = convertedRide;
             }
@@ -61,12 +57,8 @@ namespace Gordon360.Services
                 {
                     // Implicitly convert most values
                     TransitRideViewModel convertedRide = ride;
-                    // The passengers and requests have to be retrieved via another query
-                    List<string> passengers = new List<string>();
-                    List<int> pendingRequests = new List<int>();
-                    GetRequests(ride.ride_id, passengers, pendingRequests);
-                    convertedRide.passengerUsernames = passengers;
-                    convertedRide.requestIDs = pendingRequests;
+                    // The requests have to be retrieved via another query
+                    convertedRide.requestIDs = GetRequests(ride.ride_id);
 
                     offeredRides.Add(convertedRide);
                 }
@@ -142,12 +134,8 @@ namespace Gordon360.Services
                 {
                     // Implicitly convert most values
                     TransitRideViewModel convertedRide = ride;
-                    // The passengers and requests have to be retrieved via another query
-                    List<string> passengers = new List<string>();
-                    List<int> pendingRequests = new List<int>();
-                    GetRequests(ride.ride_id, passengers, pendingRequests);
-                    convertedRide.passengerUsernames = passengers;
-                    convertedRide.requestIDs = pendingRequests;
+                    // The requests have to be retrieved via another query
+                    convertedRide.requestIDs = GetRequests(ride.ride_id);
 
                     result.Add(convertedRide);
                 }
@@ -237,24 +225,20 @@ namespace Gordon360.Services
             }
         }
 
-        private void GetRequests(int rideId, List<string> passengers, List<int> pendingRequests)
+        private List<int> GetRequests(int rideId)
         {
+            List<int> requestIDs = new List<int>();
             IEnumerable<Transit_Requests> requests = _unitOfWork.TransitRequestRepository.
                 Where(m => m.ride_id == rideId);
             if (requests != null)
             {
                 foreach (Transit_Requests request in requests)
                 {
-                    if (request.is_confirmed == true)
-                    {
-                        passengers.Add(request.requester_username);
-                    }
-                    else
-                    {
-                        pendingRequests.Add(request.request_id);
-                    }
+                    requestIDs.Add(request.request_id);
                 }
             }
+
+            return requestIDs;
         }
     }
 }
