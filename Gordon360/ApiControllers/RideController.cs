@@ -144,8 +144,8 @@ namespace Gordon360.Controllers.Api
         [Route("delete/{id}")]
         public IHttpActionResult DeleteRide(int id)
         {
-            _rideService.DeleteRide(id);
-            return Ok();
+            TransitRideViewModel ride = _rideService.DeleteRide(id);
+            return Ok(ride);
         }
     }
 }

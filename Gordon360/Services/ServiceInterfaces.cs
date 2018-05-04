@@ -161,7 +161,7 @@ namespace Gordon360.Services
         IEnumerable<TransitRequestViewModel> GetByUsername(string username);
         void PostRequest(TransitRequestViewModel request);
         void UpdateConfirmed(int id, bool isConfirmed);
-        void DeleteRequest(int id);
+        TransitRequestViewModel DeleteRequest(int id);
     }
 
     public interface IRideService
@@ -177,7 +177,7 @@ namespace Gordon360.Services
         void UpdateDateTime(int id, DateTime dateTime);
         void UpdateNote(int id, string note);
         void UpdateCapacity(int id, int capacity);
-        void DeleteRide(int id);
+        TransitRideViewModel DeleteRide(int id);
     }
 }
 

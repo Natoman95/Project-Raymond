@@ -65,8 +65,8 @@ namespace Gordon360.Controllers.Api
         [Route("delete/{id}")]
         public IHttpActionResult DeleteRequest(int id)
         {
-            _requestService.DeleteRequest(id);
-            return Ok();
+            TransitRequestViewModel request = _requestService.DeleteRequest(id);
+            return Ok(request);
         }
     }
 }

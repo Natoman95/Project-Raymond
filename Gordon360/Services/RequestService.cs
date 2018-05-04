@@ -82,14 +82,18 @@ namespace Gordon360.Services
             }
         }
 
-        public void DeleteRequest(int id)
+        public TransitRequestViewModel DeleteRequest(int id)
         {
+            TransitRequestViewModel result = new TransitRequestViewModel();
             Transit_Requests request = _unitOfWork.TransitRequestRepository.GetById(id);
             if (request != null)
             {
+                result = request;
                 _unitOfWork.TransitRequestRepository.Delete(request);
                 _unitOfWork.Save();
             }
+
+            return request;
         }
     }
 }

@@ -220,14 +220,18 @@ namespace Gordon360.Services
             }
         }
 
-        public void DeleteRide(int id)
+        public TransitRideViewModel DeleteRide(int id)
         {
+            TransitRideViewModel result = new TransitRideViewModel();
             Transit_Rides ride = _unitOfWork.TransitRideRepository.GetById(id);
             if (ride != null)
             {
+                result = ride;
                 _unitOfWork.TransitRideRepository.Delete(ride);
                 _unitOfWork.Save();
             }
+
+            return result;
         }
 
         private List<TransitRequestViewModel> GetRequests(int rideId)
