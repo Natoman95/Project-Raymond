@@ -33,7 +33,7 @@ namespace Gordon360.Services
                 // Implicitly convert most values
                 TransitRideViewModel convertedRide = query;
                 // The requests have to be retrieved via another query
-                convertedRide.requestIDs = GetRequests(query.ride_id);
+                convertedRide.requests = GetRequests(query.ride_id);
 
                 ride = convertedRide;
             }
@@ -58,7 +58,7 @@ namespace Gordon360.Services
                     // Implicitly convert most values
                     TransitRideViewModel convertedRide = ride;
                     // The requests have to be retrieved via another query
-                    convertedRide.requestIDs = GetRequests(ride.ride_id);
+                    convertedRide.requests = GetRequests(ride.ride_id);
 
                     offeredRides.Add(convertedRide);
                 }
@@ -135,7 +135,7 @@ namespace Gordon360.Services
                     // Implicitly convert most values
                     TransitRideViewModel convertedRide = ride;
                     // The requests have to be retrieved via another query
-                    convertedRide.requestIDs = GetRequests(ride.ride_id);
+                    convertedRide.requests = GetRequests(ride.ride_id);
 
                     result.Add(convertedRide);
                 }
@@ -225,20 +225,20 @@ namespace Gordon360.Services
             }
         }
 
-        private List<int> GetRequests(int rideId)
+        private List<TransitRequestViewModel> GetRequests(int rideId)
         {
-            List<int> requestIDs = new List<int>();
+            List<TransitRequestViewModel> requestViews = new List<TransitRequestViewModel>();
             IEnumerable<Transit_Requests> requests = _unitOfWork.TransitRequestRepository.
                 Where(m => m.ride_id == rideId);
             if (requests != null)
             {
                 foreach (Transit_Requests request in requests)
                 {
-                    requestIDs.Add(request.request_id);
+                    requestViews.Add(request);
                 }
             }
 
-            return requestIDs;
+            return requestViews;
         }
     }
 }
