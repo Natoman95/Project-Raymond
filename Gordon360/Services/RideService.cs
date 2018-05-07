@@ -165,59 +165,84 @@ namespace Gordon360.Services
             _unitOfWork.Save();
         }
 
-        public void UpdateOrigin(int id, string origin)
+        public TransitRideViewModel UpdateOrigin(int id, string origin)
         {
+            TransitRideViewModel result = new TransitRideViewModel();
+            result.requests = new List<TransitRequestViewModel>();
             Transit_Rides ride = _unitOfWork.TransitRideRepository.GetById(id);
             if (ride != null)
             {
                 _unitOfWork.TransitRideRepository.Attach(ride);
                 ride.origin = origin;
                 _unitOfWork.Save();
+                result = ride;
             }
+
+            return result;
         }
 
-        public void UpdateDestination(int id, string destination)
+        public TransitRideViewModel UpdateDestination(int id, string destination)
         {
+            TransitRideViewModel result = new TransitRideViewModel();
+            result.requests = new List<TransitRequestViewModel>();
             Transit_Rides ride = _unitOfWork.TransitRideRepository.GetById(id);
             if (ride != null)
             {
                 _unitOfWork.TransitRideRepository.Attach(ride);
                 ride.destination = destination;
                 _unitOfWork.Save();
+                result = ride;
             }
+
+            return result;
         }
 
-        public void UpdateDateTime(int id, DateTime dateTime)
+        public TransitRideViewModel UpdateDateTime(int id, DateTime dateTime)
         {
+            TransitRideViewModel result = new TransitRideViewModel();
+            result.requests = new List<TransitRequestViewModel>();
             Transit_Rides ride = _unitOfWork.TransitRideRepository.GetById(id);
             if (ride != null)
             {
                 _unitOfWork.TransitRideRepository.Attach(ride);
                 ride.departure_datetime = dateTime;
                 _unitOfWork.Save();
+                result = ride;
             }
+
+            return result;
         }
 
-        public void UpdateNote(int id, string note)
+        public TransitRideViewModel UpdateNote(int id, string note)
         {
+            TransitRideViewModel result = new TransitRideViewModel();
+            result.requests = new List<TransitRequestViewModel>();
             Transit_Rides ride = _unitOfWork.TransitRideRepository.GetById(id);
             if (ride != null)
             {
                 _unitOfWork.TransitRideRepository.Attach(ride);
                 ride.driver_note = note;
                 _unitOfWork.Save();
+                result = ride;
             }
+
+            return result;
         }
 
-        public void UpdateCapacity(int id, int capacity)
+        public TransitRideViewModel UpdateCapacity(int id, int capacity)
         {
+            TransitRideViewModel result = new TransitRideViewModel();
+            result.requests = new List<TransitRequestViewModel>();
             Transit_Rides ride = _unitOfWork.TransitRideRepository.GetById(id);
             if (ride != null)
             {
                 _unitOfWork.TransitRideRepository.Attach(ride);
                 ride.max_capacity = capacity;
                 _unitOfWork.Save();
+                result = ride;
             }
+
+            return result;
         }
 
         public TransitRideViewModel DeleteRide(int id)

@@ -103,40 +103,40 @@ namespace Gordon360.Controllers.Api
         [Route("origin/{id}/{origin}")]
         public IHttpActionResult UpdateOrigin(int id, string origin)
         {
-            _rideService.UpdateOrigin(id, origin);
-            return Ok();
+            TransitRideViewModel ride = _rideService.UpdateOrigin(id, origin);
+            return Ok(ride);
         }
 
         [HttpPut]
         [Route("destination/{id}/{destination}")]
         public IHttpActionResult UpdateDestination(int id, string destination)
         {
-            _rideService.UpdateDestination(id, destination);
-            return Ok();
+            TransitRideViewModel ride = _rideService.UpdateDestination(id, destination);
+            return Ok(ride);
         }
 
         [HttpPut]
         [Route("date/{id}/{dateTime}")]
         public IHttpActionResult UpdateDateTime(int id, DateTime dateTime)
         {
-            _rideService.UpdateDateTime(id, dateTime);
-            return Ok();
+            TransitRideViewModel ride = _rideService.UpdateDateTime(id, dateTime);
+            return Ok(ride);
         }
 
         [HttpPut]
         [Route("note/{id}/{note}")]
         public IHttpActionResult UpdateNote(int id, string note)
         {
-            _rideService.UpdateNote(id, note);
-            return Ok();
+            TransitRideViewModel ride = _rideService.UpdateNote(id, note);
+            return Ok(ride);
         }
 
         [HttpPut]
         [Route("capacity/{id}/{capacity}")]
         public IHttpActionResult UpdateCapacity(int id, int capacity)
         {
-            _rideService.UpdateCapacity(id, capacity);
-            return Ok();
+            TransitRideViewModel ride = _rideService.UpdateCapacity(id, capacity);
+            return Ok(ride);
         }
 
         // Finds a ride by id and deletes it

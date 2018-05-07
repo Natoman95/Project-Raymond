@@ -71,15 +71,19 @@ namespace Gordon360.Services
             _unitOfWork.Save();
         }
 
-        public void UpdateConfirmed(int id, bool isConfirmed)
+        public TransitRequestViewModel UpdateConfirmed(int id, bool isConfirmed)
         {
+            TransitRequestViewModel result = new TransitRequestViewModel();
             Transit_Requests request = _unitOfWork.TransitRequestRepository.GetById(id);
             if (request != null)
             {
                 _unitOfWork.TransitRequestRepository.Attach(request);
                 request.is_confirmed = isConfirmed;
                 _unitOfWork.Save();
+                result = request;
             }
+
+            return result;
         }
 
         public TransitRequestViewModel DeleteRequest(int id)

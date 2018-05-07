@@ -56,8 +56,8 @@ namespace Gordon360.Controllers.Api
         [Route("confirmed/{id}/{isconfirmed}")]
         public IHttpActionResult UpdateConfirmed(int id, bool isconfirmed)
         {
-            _requestService.UpdateConfirmed(id, isconfirmed);
-            return Ok();
+            TransitRequestViewModel request = _requestService.UpdateConfirmed(id, isconfirmed);
+            return Ok(request);
         }
 
         // Find a request by its unique id and delete it

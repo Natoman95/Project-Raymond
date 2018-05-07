@@ -160,7 +160,7 @@ namespace Gordon360.Services
         TransitRequestViewModel GetById(int id);
         IEnumerable<TransitRequestViewModel> GetByUsername(string username);
         void PostRequest(TransitRequestViewModel request);
-        void UpdateConfirmed(int id, bool isConfirmed);
+        TransitRequestViewModel UpdateConfirmed(int id, bool isConfirmed);
         TransitRequestViewModel DeleteRequest(int id);
     }
 
@@ -172,11 +172,11 @@ namespace Gordon360.Services
         IEnumerable<TransitRideViewModel> GetPendingByUsername(string username);
         IEnumerable<TransitRideViewModel> GetByLocation(string origin, string destination, DateTime startDate, DateTime endDate);
         void PostRide(TransitRideViewModel ride);
-        void UpdateOrigin(int id, string origin);
-        void UpdateDestination(int id, string destination);
-        void UpdateDateTime(int id, DateTime dateTime);
-        void UpdateNote(int id, string note);
-        void UpdateCapacity(int id, int capacity);
+        TransitRideViewModel UpdateOrigin(int id, string origin);
+        TransitRideViewModel UpdateDestination(int id, string destination);
+        TransitRideViewModel UpdateDateTime(int id, DateTime dateTime);
+        TransitRideViewModel UpdateNote(int id, string note);
+        TransitRideViewModel UpdateCapacity(int id, int capacity);
         TransitRideViewModel DeleteRide(int id);
     }
 }
